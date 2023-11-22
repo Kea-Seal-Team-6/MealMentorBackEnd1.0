@@ -19,7 +19,12 @@ public class Meal {
     String mealType;
     String title;
 
-    @OneToMany(mappedBy = "meal", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToMany
+    @JoinTable(
+            name = "meal_ingredients", // Navnet på join-tabellen
+            joinColumns = @JoinColumn(name = "meal_id"), // Kolonnen i join-tabellen, der refererer til `User`
+            inverseJoinColumns = @JoinColumn(name = "ingredient_name") // Kolonnen i join-tabellen, der refererer til `Allergy`
+    )
     List<Ingredient> ingredients;
 
     String instructions;
@@ -32,6 +37,17 @@ public class Meal {
     public Meal(String mealType, String title, String instructions, int calories, int protein, int carbs, int fat) {
         this.mealType = mealType;
         this.title = title;
+        this.instructions = instructions;
+        this.calories = calories;
+        this.protein = protein;
+        this.carbs = carbs;
+        this.fat = fat;
+    }
+
+    public Meal(String mealType, String title, List<Ingredient> ingredients, String instructions, int calories, int protein, int carbs, int fat) {
+        this.mealType = mealType;
+        this.title = title;
+        this.ingredients = ingredients;
         this.instructions = instructions;
         this.calories = calories;
         this.protein = protein;

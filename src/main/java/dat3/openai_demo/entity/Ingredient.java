@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @NoArgsConstructor @Getter @Setter @AllArgsConstructor
 
@@ -13,16 +15,12 @@ import lombok.Setter;
 @Table(name="Ingredients")
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-
     String name;
 
-    @ManyToOne
-    Meal meal;
+    @ManyToMany(mappedBy = "ingredients")
+    List<Meal> meals;
 
-    public Ingredient(String name, Meal meal) {
+    public Ingredient(String name) {
         this.name = name;
-        this.meal = meal;
     }
 }

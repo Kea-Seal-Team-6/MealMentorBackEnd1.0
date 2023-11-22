@@ -13,6 +13,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -70,18 +71,24 @@ public class DeveloperData implements ApplicationRunner {
 
     private void setupTestMeals() {
 
-        Meal meal1 = new Meal("breakfast", "tomato breakfast", "bake it", 100, 50, 200, 10);
-        Meal meal2 = new Meal("lunch", "banana lunch", "eat it raw", 100, 50, 200, 10);
-
-        mealRepository.saveAll(Arrays.asList(meal1, meal2));
-
-        Ingredient ingredient = new Ingredient("1 Tomato", meal1);
-        Ingredient ingredient2 = new Ingredient("2 Bananas", meal2);
-        Ingredient ingredient3 = new Ingredient("1 Tomato", meal2);
+        Ingredient ingredient = new Ingredient("1 Tomato");
+        Ingredient ingredient2 = new Ingredient("2 Bananas");
+        Ingredient ingredient3 = new Ingredient("1 Tomato");
 
         ingredientRepository.save(ingredient);
         ingredientRepository.save(ingredient2);
         ingredientRepository.save(ingredient3);
+
+        List<Ingredient> list1 = new ArrayList<>();
+        List<Ingredient> list2 = new ArrayList<>();
+        list1.add(ingredient);
+        list2.addAll(Arrays.asList(ingredient,ingredient2));
+
+        Meal meal1 = new Meal("breakfast", "tomato breakfast", list1, "bake it", 100, 50, 200, 10);
+        Meal meal2 = new Meal("lunch", "banana lunch", list2, "eat it raw", 100, 50, 200, 10);
+
+        mealRepository.saveAll(Arrays.asList(meal1, meal2));
+
 
 
 
