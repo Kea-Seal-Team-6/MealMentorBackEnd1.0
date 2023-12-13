@@ -50,4 +50,4 @@ jobs:
           app-name: 'MealMentor-Backend'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2169699B86B3422D850E5AD8EDEBB017 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F4789ED3F58447CEA2E26C6C33BE8E0C }}
